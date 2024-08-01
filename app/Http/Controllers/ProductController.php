@@ -172,13 +172,20 @@ class ProductController extends Controller
     // 削除処理
     public function destroy($id)
     {
-        $product = Product::find($id);
-        $product->delete();
+        // $product = Product::find($id);
+        // $product->delete();
+        try {
+
+            $product = Product::find($id);
+            $product->delete();
+            DB::commit();
+        } catch (\Exception $e) {
+            Log::error($e);
+            DB::rollback();
+            return back();
+        }
+
 
         return redirect(route('products.index'));
     }
-
-    // public function search()
-    // {
-    // }
 }

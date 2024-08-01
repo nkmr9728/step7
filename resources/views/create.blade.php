@@ -19,7 +19,7 @@
             <div class="mb-2 mt-2">
                 <div class="form-group">
                     <label for=" inputName" class="col-form-label">商品名</label>
-                    <input type="text" name="product_name" class="form-control" placeholder="商品名">
+                    <input type="text" name="product_name" class="form-control" placeholder="商品名" value="{{ old('product_name') }}">
                     @if($errors->has('product_name'))
                     <span style="color: red;">
                         <p>{{ $errors->first('product_name') }}</p>
@@ -36,19 +36,19 @@
                         @foreach ($companies as $company)
                         <option value="{{ $company->id}}">{{ $company ->company_name }}</option>
                         @endforeach
-                        @if($errors->has('company'))
-                        <span style="color: red;">
-                            <p>{{ $errors->first('company') }}</p>
-                        </span>
-                        @endif
                     </select>
+                    @if($errors->has('company'))
+                    <span style="color: red;">
+                        <p>{{ $errors->first('company') }}</p>
+                    </span>
+                    @endif
                 </div>
             </div>
 
             <div class="mb-2 mt-2">
                 <div class="form-group">
                     <label for="inputName" class="col-form-label">価格</label>
-                    <input type="text" name="price" class="form-control" placeholder="価格">
+                    <input type="text" name="price" class="form-control" placeholder="価格" value="{{ old('price') }}">
                     @if($errors->has('price'))
                     <span style="color: red;">
                         <p>{{ $errors->first('price') }}</p>
@@ -60,7 +60,7 @@
             <div class="mb-2 mt-2">
                 <div class="form-group">
                     <label for="inputName" class="col-form-label">在庫</label>
-                    <input type="text" name="stock" class="form-control" placeholder="在庫">
+                    <input type="text" name="stock" class="form-control" placeholder="在庫" value="{{ old('stock') }}">
                     @if($errors->has('stock'))
                     <span style="color: red;">
                         <p>{{ $errors->first('stock') }}</p>
