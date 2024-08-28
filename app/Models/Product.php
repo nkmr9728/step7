@@ -5,9 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+//ソート機能用で追加
+use Kyslik\ColumnSortable\Sortable;
+
 
 class Product extends Model
 {
+    use Sortable;
     use HasFactory;
     protected $table = "products";
     // [fill]を使う際は必要⬇︎
@@ -45,5 +49,10 @@ class Product extends Model
             'img_path'  => $image_path,
         ])
             ->save();
+    }
+
+    public function sale()
+    {
+        return $this->hasMany(Sale::class);
     }
 }

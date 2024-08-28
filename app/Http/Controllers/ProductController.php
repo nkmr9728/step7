@@ -22,10 +22,20 @@ class ProductController extends Controller
     // 商品画面一覧
     public function index(Request $rq)
     {
-        //「キーワード検索」「メーカー名検索」
+
+
+        //検索機能
+
+        Log::info($rq->input('keyword'));
+
         $keyword = $rq->input('keyword');
         $company_id = $rq->input('company_id');
-        $query = Product::query();
+        $min_price = $rq->input('min_price');
+        $max_price = $rq->input('max_price');
+        $min_stock = $rq->input('min_stock');
+        $max_stock = $rq->input('max_stock');
+
+        $query = Product::sortable();
 
         if ($keyword) {
             $query->where('product_name', 'like', '%' . $keyword . '%');
@@ -33,10 +43,24 @@ class ProductController extends Controller
         if ($company_id) {
             $query->where('company_id', '=', $company_id);
         }
+        if ($min_price) {
+            $query->where('price', '>=', $min_price);
+        }
+        if ($max_price) {
+            $query->where('price', '<=', $max_price);
+        }
+        if ($min_stock) {
+            $query->where('stock', '>=', $min_stock);
+        }
+        if ($max_stock) {
+            $query->where('stock', '<=', $max_stock);
+        }
+
         $companies_list = Company::all();
         $products = $query->get();
 
         return view('index', compact('products', 'companies_list'));
+        // return response()->json($products);
     }
 
     /**
@@ -170,22 +194,19 @@ class ProductController extends Controller
      */
 
     // 削除処理
-    public function destroy($id)
+    public function destroy(Request $request, Product $product)
     {
-        // $product = Product::find($id);
-        // $product->delete();
+
         try {
 
-            $product = Product::find($id);
+            $product = Product::find($request->id);
             $product->delete();
             DB::commit();
+            return response()->json();
         } catch (\Exception $e) {
             Log::error($e);
             DB::rollback();
             return back();
         }
-
-
-        return redirect(route('products.index'));
     }
 }
