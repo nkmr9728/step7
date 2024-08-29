@@ -12,7 +12,6 @@ class Sale extends Model
     protected $fillable = [
         'id', //ここに配列で追加、編集するフィールドを入力する
         'product_id',
-        // 'フィールド3',
     ]; //　$fillable属性を追記
 
     public function product()

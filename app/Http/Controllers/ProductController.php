@@ -103,7 +103,6 @@ class ProductController extends Controller
         DB::beginTransaction();
         try {
             // 登録処理呼び出し
-            $model = new Product();
             $model->registerProduct($request, $image_path);
             DB::commit();
         } catch (\Exception $e) {
@@ -159,10 +158,9 @@ class ProductController extends Controller
     //  更新処理
     public function update(ProductRequest $request, $id)
     {
-        $model = new Product();
         $image = $request->file('image');
         $image_path = null;
-
+        $product = new Product();
         if ($image) {
             $file_name = $image->getClientOriginalName();
             $image->storeAs('public/images', $file_name);
@@ -172,8 +170,6 @@ class ProductController extends Controller
         DB::beginTransaction();
         try {
             // 登録処理呼び出し
-
-            $product = new Product();
             $product->updateProduct($id, $request, $image_path);
             DB::commit();
         } catch (\Exception $e) {

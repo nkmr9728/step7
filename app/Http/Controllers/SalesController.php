@@ -40,13 +40,14 @@ class SalesController extends Controller
                 'product_id' => $productId,
                 // 主キーであるIDと、created_at , updated_atは自動入力されるため不要
             ]);
+            $sale->save();
             DB::commit();
         } catch (\Exception $e) {
             Log::error($e);
             DB::rollback();
-            return back();
+            return response()->json(['message' => '購入に失敗しました'], 400);
         }
-        $sale->save();
+
 
         // レスポンスを返す
         return response()->json(['message' => '購入成功']);

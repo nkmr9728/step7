@@ -15,7 +15,7 @@
 
                 <dt>キーワード</dt>
                 <dd>
-                    <input type="text" name="keyword" class="form-control" placeholder="商品名" value="" id="request">
+                    <input type="text" name="keyword" class="form-control" placeholder="商品名" value="">
                 </dd>
 
                 <dt>メーカー名</dt>
@@ -30,17 +30,17 @@
                 <dt>価格帯</dt>
                 <dd>
                     <div class="input-group">
-                        <input type="text" name="min_price" class="form-control" placeholder="円" value="" id="request">
+                        <input type="text" name="min_price" class="form-control" placeholder="円" value="">
                         <span class="input-group-text">〜</span>
-                        <input type="text" name="max_price" class="form-control" placeholder="円" value="" id="request">
+                        <input type="text" name="max_price" class="form-control" placeholder="円" value="">
                     </div>
                 </dd>
                 <dt>在庫数</dt>
                 <dd>
                     <div class="input-group">
-                        <input type="text" name="min_stock" class="form-control" placeholder="個" value="" id="request">
+                        <input type="text" name="min_stock" class="form-control" placeholder="個" value="">
                         <span class="input-group-text">〜</span>
-                        <input type="text" name="max_stock" class="form-control" placeholder="個" value="" id="request">
+                        <input type="text" name="max_stock" class="form-control" placeholder="個" value="">
                     </div>
                 </dd>
             </dl>
